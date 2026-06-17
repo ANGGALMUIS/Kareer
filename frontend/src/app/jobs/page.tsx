@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import JobCard from "@/components/jobs/JobCard";
-import { useSearchParams } from "next/navigation";
+
 import { getJobs } from "@/services/job.service";
 
 import { Job } from "@/types/job";
@@ -34,8 +34,6 @@ export default function JobsPage() {
   const [sortBy, setSortBy] = useState("relevant");
 
   const [salaryMax, setSalaryMax] = useState("");
-
-  const searchParams = useSearchParams();
 
   const fetchJobs = async () => {
     try {
@@ -88,12 +86,14 @@ export default function JobsPage() {
   ]);
 
   useEffect(() => {
-    const keywordFromUrl = searchParams.get("keyword") || "";
+    const params = new URLSearchParams(window.location.search);
+
+    const keywordFromUrl = params.get("keyword") || "";
 
     if (keywordFromUrl) {
       setKeyword(keywordFromUrl);
     }
-  }, [searchParams]);
+  }, []);
 
   const sortedJobs = [...jobs].sort((a, b) => {
     if (sortBy === "newest") {
