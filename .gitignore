@@ -1,0 +1,26 @@
+# dependencies
+node_modules
+
+# build
+.next
+dist
+
+# env
+.env
+.env.local
+.env.production
+
+# logs
+*.log
+
+# uploads sementara
+uploads
+
+# prisma generated
+.prisma
+
+# vscode
+.vscode
+
+# OS
+.DS_Store

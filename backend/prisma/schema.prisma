@@ -1,0 +1,361 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id               String            @id @default(uuid())
+  name             String
+  email            String            @unique
+  password         String?
+  image            String?
+  role             Role              @default(APPLICANT)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  applicantProfile ApplicantProfile?
+  activityLogs     ActivityLog[]
+  applications     Application[]
+  company          Company?
+  notifications    Notification[]
+  savedJobs        SavedJob[]
+  companyRequests  CompanyRequest[]
+  applicantSubscription ApplicantSubscription?
+  resetPasswordToken String?
+  resetPasswordExpiry DateTime?
+  
+  @@map("users")
+}
+
+model ApplicantProfile {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  phone        String?
+  headline     String?
+  bio          String?
+  location     String?
+  linkedinUrl  String?
+  githubUrl    String?
+  portfolioUrl String?
+  skills       String[]
+  cvUrl        String?
+  isPublic     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Interview {
+  id            String          @id @default(uuid())
+  applicationId String          @unique
+  scheduledAt   DateTime
+  meetingLink   String?
+  location      String?
+  notes         String?
+  status        InterviewStatus @default(SCHEDULED)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  application   Application     @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@map("interviews")
+}
+
+model Company {
+  id                 String                @id @default(uuid())
+  userId             String                @unique
+  name               String
+  industry           String?
+  description        String?
+  website            String?
+  address            String?
+  logoUrl            String?
+  verificationStatus VerificationStatus    @default(PENDING)
+  rejectionReason    String?
+  verifiedAt         DateTime?
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+  profileCompleted   Boolean               @default(false)
+  user               User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscriptions      CompanySubscription[]
+  jobs               JobListing[]
+  payments           Payment[]
+  isVerified Boolean @default(false)
+  
+  @@map("companies")
+}
+
+model CompanySubscription {
+  id        String               @id @default(uuid())
+  companyId String
+  plan      SubscriptionPlanType
+  status    SubscriptionStatus   @default(ACTIVE)
+  startedAt DateTime             @default(now())
+  expiredAt DateTime?
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  company   Company              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("company_subscriptions")
+}
+
+model Payment {
+  id              String               @id @default(uuid())
+  companyId       String
+  plan            SubscriptionPlanType
+  bankName        String
+  accountNumber   String
+  accountHolder   String
+  amount          Int
+  status          PaymentStatus        @default(PENDING)
+  approvedAt      DateTime?
+  rejectionReason String?
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  company         Company              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  paymentProofUrl String?
+  
+  @@index([companyId])
+  @@map("payments")
+}
+
+model JobListing {
+  id              String           @id @default(uuid())
+  companyId       String
+  title           String
+  description     String
+  requirements    String
+  location        String?
+  salaryMin       Int?
+  salaryMax       Int?
+  status          JobStatus        @default(OPEN)
+  deadline        DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  employmentType  EmploymentType?
+  experienceLevel ExperienceLevel?
+  industry        String?
+  workMode        WorkMode?
+  benefits        String[]
+  skills          String[]
+  assessmentFileUrl  String?
+  assessmentFileName String?
+  applications    Application[]
+  company         Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  savedBy         SavedJob[]
+
+  @@index([companyId])
+  @@map("job_listings")
+}
+
+model Application {
+  id           String            @id @default(uuid())
+  userId       String
+  jobListingId String
+  coverLetter  String?
+  assessmentAnswerUrl  String?
+  assessmentAnswerName String?
+  status       ApplicationStatus @default(SUBMITTED)
+  appliedAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  jobListing   JobListing        @relation(fields: [jobListingId], references: [id], onDelete: Cascade)
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  interview    Interview?
+
+  @@index([userId])
+  @@index([jobListingId])
+  @@index([status])
+  @@map("applications")
+}
+
+model SavedJob {
+  id           String     @id @default(uuid())
+  userId       String
+  jobListingId String
+  createdAt    DateTime   @default(now())
+  jobListing   JobListing @relation(fields: [jobListingId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, jobListingId])
+  @@index([userId])
+  @@index([jobListingId])
+  @@map("saved_jobs")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("notifications")
+}
+
+model ActivityLog {
+  id          String       @id @default(uuid())
+  userId      String?
+  type        ActivityType
+  title       String
+  description String
+  createdAt   DateTime     @default(now())
+  user        User?        @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([type])
+  @@map("activity_logs")
+}
+
+model CompanyRequest {
+  id String @id @default(cuid())
+
+  userId String 
+  user User @relation(fields: [userId], references: [id])
+
+  companyName String
+  industry String
+
+  website String?
+  address String
+
+  description String
+
+  proposalUrl String?
+
+  status CompanyRequestStatus @default(PENDING)
+
+  rejectionReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ApplicantSubscription {
+  id String @id @default(uuid())
+
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
+
+  plan ApplicantPlan @default(FREE)
+
+  paymentProof String?
+
+  status ApplicantSubscriptionStatus @default(PENDING)
+
+  startDate DateTime?
+  endDate DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("applicant_subscriptions")
+}
+
+enum Role {
+  APPLICANT
+  COMPANY
+  ADMIN
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum JobStatus {
+  OPEN
+  CLOSED
+  DRAFT
+}
+
+enum ApplicationStatus {
+  APPLIED
+  SUBMITTED
+  REVIEW
+  INTERVIEW
+  ACCEPTED
+  REJECTED
+}
+
+enum SubscriptionPlanType {
+  FREE
+  BASIC
+  PREMIUM
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ActivityType {
+  COMPANY_APPROVED
+  COMPANY_REJECTED
+  PAYMENT_APPROVED
+  PAYMENT_REJECTED
+  JOB_CREATED
+  JOB_DELETED
+  APPLICATION_CREATED
+  JOB_SAVED
+  APPLICATION_STATUS_UPDATED
+}
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  INTERNSHIP
+  CONTRACT
+  FREELANCE
+}
+
+enum WorkMode {
+  ONSITE
+  HYBRID
+  REMOTE
+}
+
+enum ExperienceLevel {
+  FRESH_GRADUATE
+  JUNIOR
+  MID_LEVEL
+  SENIOR
+}
+
+enum InterviewStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum CompanyRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ApplicantPlan {
+  FREE
+  PREMIUM
+}
+
+enum ApplicantSubscriptionStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  REJECTED
+}
