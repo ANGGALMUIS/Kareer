@@ -47,7 +47,7 @@ export default function CompanyProfilePage() {
 
   return (
     <section className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-7xl py-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
         {/* HERO */}
 
         <div
@@ -58,7 +58,9 @@ export default function CompanyProfilePage() {
           via-indigo-600
           to-cyan-500
 
-          p-10
+          p-7 
+          sm:p-6 
+          lg:p-10
           text-white
           shadow-xl
         "
@@ -67,8 +69,12 @@ export default function CompanyProfilePage() {
             <div
               className="
               flex
-              h-28
-              w-28
+              h-20
+w-20
+sm:h-24
+sm:w-24
+lg:h-28
+lg:w-28
               items-center
               justify-center
               overflow-hidden
@@ -93,7 +99,9 @@ export default function CompanyProfilePage() {
             </div>
 
             <div className="flex-1">
-              <h1 className="text-5xl font-bold">{company.name}</h1>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                {company.name}
+              </h1>
 
               <p className="mt-2 text-blue-100">
                 {company.industry || "Perusahaan"}
