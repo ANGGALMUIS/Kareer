@@ -57,7 +57,7 @@ export default function CompanySettingsPage() {
   return (
     <ProtectedRoute role="COMPANY">
       <section className="min-h-screen bg-slate-50">
-        <div className="mx-auto max-w-6xl px-6 py-1">
+        <div className="mx-auto max-w-7xl px-1 sm:px-1 md:px-6 py-1">
           <div
             className="
     rounded-[32px]
@@ -73,9 +73,19 @@ export default function CompanySettingsPage() {
               <div>
                 <p className="text-white/80">Account Workspace</p>
 
-                <h1 className="mt-2 text-5xl font-bold">🔐 Settings</h1>
+                <h1 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold">
+                  🔐 Settings
+                </h1>
 
-                <p className="mt-4 text-white/90">
+                <p
+                  className="
+    mt-3
+    max-w-xl
+    text-sm
+    sm:text-base
+    text-purple-100
+  "
+                >
                   Kelola email dan keamanan akun perusahaan.
                 </p>
               </div>
@@ -84,7 +94,7 @@ export default function CompanySettingsPage() {
                 className="
         rounded-3xl
         bg-white/15
-        px-8
+        px-7
         py-5
         backdrop-blur
       "

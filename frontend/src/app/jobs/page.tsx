@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import JobCard from "@/components/jobs/JobCard";
-
+import { useSearchParams } from "next/navigation";
 import { getJobs } from "@/services/job.service";
 
 import { Job } from "@/types/job";
@@ -12,7 +12,7 @@ export default function JobsPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
 
   const [loading, setLoading] = useState(true);
-
+  const [showFilters, setShowFilters] = useState(false);
   const [page, setPage] = useState(1);
 
   const [totalPages, setTotalPages] = useState(1);
@@ -34,6 +34,8 @@ export default function JobsPage() {
   const [sortBy, setSortBy] = useState("relevant");
 
   const [salaryMax, setSalaryMax] = useState("");
+
+  const searchParams = useSearchParams();
 
   const fetchJobs = async () => {
     try {
@@ -84,6 +86,14 @@ export default function JobsPage() {
     salaryMin,
     salaryMax,
   ]);
+
+  useEffect(() => {
+    const keywordFromUrl = searchParams.get("keyword") || "";
+
+    if (keywordFromUrl) {
+      setKeyword(keywordFromUrl);
+    }
+  }, [searchParams]);
 
   const sortedJobs = [...jobs].sort((a, b) => {
     if (sortBy === "newest") {
@@ -201,21 +211,82 @@ export default function JobsPage() {
       {/* CONTENT */}
 
       <div className="mx-auto max-w-7xl px-6 py-10">
+        {/* MOBILE FILTER BAR */}
+        <div className="mb-6 lg:hidden">
+          <button
+            onClick={() => setShowFilters(true)}
+            className="
+        flex
+        w-full
+        items-center
+        justify-center
+        gap-2
+        rounded-2xl
+        border
+        border-slate-200
+        bg-white
+        py-3
+        font-medium
+        text-slate-700
+        shadow-sm
+      "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 4h18M6 12h12M10 20h4"
+              />
+            </svg>
+            Filter Pencarian
+          </button>
+        </div>
+
         <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
           {/* FILTER */}
 
+          {showFilters && (
+            <div
+              onClick={() => setShowFilters(false)}
+              className="
+      fixed
+      inset-0
+      z-40
+      bg-black/40
+      lg:hidden
+    "
+            />
+          )}
+
           <aside
-            className="
-    sticky
-    top-24
-    h-fit
-    rounded-2xl
-    border
-    border-slate-200
+            className={`
+    ${showFilters ? "translate-x-0" : "-translate-x-full"}
+
+    fixed
+    inset-y-0
+    left-0
+    z-50
+    w-[75%]
+max-w-[300px]
+    overflow-y-auto
     bg-white
     p-6
-    shadow-sm
-  "
+    shadow-2xl
+    transition-transform
+
+    lg:sticky
+    lg:top-24
+    lg:h-fit
+    lg:w-auto
+    lg:translate-x-0
+  `}
           >
             <div className="border-b border-slate-200 pb-5">
               <h2 className="text-lg font-bold text-slate-900">Prioritaskan</h2>

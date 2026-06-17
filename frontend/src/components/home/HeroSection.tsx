@@ -1,14 +1,23 @@
 "use client";
 
 import Link from "next/link";
-
+import { useState} from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 import Container from "@/components/ui/Container";
 
 export default function HeroSection() {
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+
+  const handleSearch = () => {
+    router.push(`/jobs?keyword=${encodeURIComponent(search)}`);
+  };
+
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-white to-white py-28">
+    <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-white to-white py-16 md:py-28">
       {/* Floating Background */}
 
       <motion.div
@@ -105,13 +114,14 @@ export default function HeroSection() {
               delay: 0.2,
             }}
             className="
-              mt-8
-              text-5xl
-              font-extrabold
-              leading-tight
-              tracking-tight
-              md:text-7xl
-            "
+mt-6
+text-3xl
+font-extrabold
+leading-tight
+tracking-tight
+sm:text-5xl
+md:text-7xl
+"
           >
             Temukan
             <br />
@@ -139,7 +149,7 @@ export default function HeroSection() {
               mx-auto
               mt-8
               max-w-3xl
-              text-lg
+              text-base
               leading-relaxed
               text-gray-600
               md:text-xl
@@ -183,32 +193,40 @@ export default function HeroSection() {
           >
             <input
               type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
               placeholder="Cari posisi, perusahaan, atau skill..."
               className="
-                flex-1
-                rounded-2xl
-                border
-                border-gray-200
-                px-5
-                py-4
-                outline-none
-                focus:border-blue-500
-              "
+    flex-1
+    rounded-2xl
+    border
+    border-gray-200
+    px-5
+    py-4
+    outline-none
+    focus:border-blue-500
+  "
             />
 
             <button
+              onClick={handleSearch}
               className="
-                rounded-2xl
-                bg-blue-600
-                px-8
-                py-4
-                font-semibold
-                text-white
-                transition-all
-                duration-300
-                hover:scale-105
-                hover:bg-blue-700
-              "
+    rounded-2xl
+    bg-blue-600
+    px-8
+    py-4
+    font-semibold
+    text-white
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:bg-blue-700
+  "
             >
               Cari Lowongan
             </button>
@@ -227,11 +245,13 @@ export default function HeroSection() {
               delay: 0.9,
             }}
             className="
-              mt-8
-              flex
-              justify-center
-              gap-4
-            "
+mt-8
+flex
+flex-col
+gap-3
+sm:flex-row
+justify-center
+"
           >
             <Link
               href="/jobs"
@@ -282,11 +302,12 @@ export default function HeroSection() {
               delay: 1.1,
             }}
             className="
-              mt-16
-              grid
-              gap-6
-              md:grid-cols-3
-            "
+mt-10
+grid
+grid-cols-1
+gap-4
+sm:grid-cols-3
+"
           >
             <div>
               <h3 className="text-3xl font-bold text-blue-600">10.000+</h3>

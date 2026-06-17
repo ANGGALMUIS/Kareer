@@ -340,7 +340,7 @@ export default function CompanyApplicationsPage() {
   return (
     <ProtectedRoute role="COMPANY">
       <section className="min-h-screen bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-1">
+        <div className="mx-auto max-w-7xl px-1 sm:px-1 md:px-6 py-1">
           <div
             className="
     relative
@@ -367,13 +367,31 @@ export default function CompanyApplicationsPage() {
     "
             />
 
-            <div className="relative z-10 flex items-center justify-between">
+            <div
+              className="
+    relative z-10
+    flex flex-col gap-5
+    md:flex-row
+    md:items-center
+    md:justify-between
+  "
+            >
               <div>
                 <p className="text-purple-100">Recruitment Workspace</p>
 
-                <h1 className="mt-2 text-5xl font-bold">👥 Pelamar</h1>
+                <h1 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold">
+                  👥 Pelamar
+                </h1>
 
-                <p className="mt-4 max-w-xl text-purple-100">
+                <p
+                  className="
+    mt-3
+    max-w-xl
+    text-sm
+    sm:text-base
+    text-purple-100
+  "
+                >
                   Kelola seluruh kandidat yang melamar, pantau proses seleksi,
                   dan jadwalkan interview.
                 </p>
@@ -383,13 +401,15 @@ export default function CompanyApplicationsPage() {
                 onClick={exportToExcel}
                 disabled={exporting}
                 className="
-        rounded-2xl
-        bg-white
-        px-6
-        py-3
-        font-semibold
-        text-indigo-700
-      "
+w-full
+md:w-auto
+rounded-2xl
+bg-white
+px-5
+py-3
+font-semibold
+text-indigo-700
+"
               >
                 {exporting ? "Exporting..." : "Export Excel"}
               </button>
@@ -434,12 +454,13 @@ export default function CompanyApplicationsPage() {
     border
     border-slate-100
     bg-white
-    p-6
+    p-4 
+    sm:p-5
     mt-0
     shadow-sm
   "
           >
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-3 md:flex-row">
               <input
                 type="text"
                 placeholder="🔍 Cari kandidat..."

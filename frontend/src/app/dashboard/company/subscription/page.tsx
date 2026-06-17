@@ -95,7 +95,7 @@ export default function SubscriptionPage() {
   return (
     <ProtectedRoute role="COMPANY">
       <section className="min-h-screen bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-1">
+        <div className="mx-auto max-w-7xl px-1 sm:px-1 md:px-6 py-1">
           {/* HERO */}
           <div
             className="
@@ -409,7 +409,6 @@ export default function SubscriptionPage() {
                 )}
               </div>
             )}
-            
           </div>
         </div>
       </section>

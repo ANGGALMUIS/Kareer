@@ -49,7 +49,18 @@ export default function CompaniesPage() {
 
   return (
     <section className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-7xl  py-6">
+      <div
+        className="
+    mx-auto
+    max-w-7xl
+
+    px-4
+    sm:px-6
+    lg:px-8
+
+    py-6
+  "
+      >
         {/* HERO */}
 
         <div
@@ -213,6 +224,7 @@ export default function CompaniesPage() {
                 className="
       group
       rounded-3xl
+      overflow-hidden
       border
       border-slate-200
       bg-white
@@ -225,7 +237,20 @@ export default function CompaniesPage() {
       hover:shadow-xl
     "
               >
-                <div className="flex gap-5">
+                <div
+                  className="
+    flex
+    flex-col
+    items-center
+    text-center
+
+    sm:flex-row
+    sm:items-start
+    sm:text-left
+
+    gap-5
+  "
+                >
                   {/* LOGO */}
 
                   <div
@@ -272,17 +297,26 @@ export default function CompaniesPage() {
 
                   {/* CONTENT */}
 
-                  <div className="min-w-0 flex-1">
+                  <div
+                    className="
+    min-w-0
+    flex-1
+    w-full
+
+    text-left
+  "
+                  >
                     <div className="flex items-start justify-between">
                       <div>
                         <h3
                           className="
-                text-xl
-                font-bold
-                text-slate-900
-                transition
-                group-hover:text-blue-600
-              "
+    break-words
+    text-xl
+    font-bold
+    text-slate-900
+    transition
+    group-hover:text-blue-600
+  "
                         >
                           {company.name}
                         </h3>
@@ -319,18 +353,40 @@ export default function CompaniesPage() {
                         "Perusahaan telah bergabung bersama Kareer."}
                     </p>
 
-                    <div className="mt-4 space-y-2 text-sm text-slate-600">
+                    <div
+                      className="
+    mt-4
+    min-w-0
+    space-y-2
+    text-sm
+    text-slate-600
+  "
+                    >
                       {company.website && (
                         <div className="flex items-center gap-2">
                           <Globe size={14} />
-                          <span className="truncate">{company.website}</span>
+                          <span
+                            className="
+    min-w-0
+    break-all
+  "
+                          >
+                            {company.website}
+                          </span>
                         </div>
                       )}
 
                       {company.address && (
                         <div className="flex items-center gap-2">
                           <Building2 size={14} />
-                          <span className="truncate">{company.address}</span>
+                          <span
+                            className="
+    min-w-0
+    break-words
+  "
+                          >
+                            {company.address}
+                          </span>
                         </div>
                       )}
                     </div>

@@ -62,6 +62,7 @@ export default function JobCard({ job }: Props) {
         duration-300
         hover:border-blue-300
         hover:shadow-lg
+        overflow-hidden
       "
       >
         {/* HEADER */}
@@ -87,11 +88,21 @@ export default function JobCard({ job }: Props) {
           </div>
 
           <div className="min-w-0 flex-1">
-            <div className="flex items-start justify-between gap-3">
+            <div
+              className="
+    flex
+    flex-col
+    gap-2
+    sm:flex-row
+    sm:items-start
+    sm:justify-between
+  "
+            >
               <div className="min-w-0">
                 <h2
                   className="
-                  truncate
+                  line-clamp-2
+    break-words
                   text-lg
                   font-bold
                   text-slate-900
@@ -107,7 +118,7 @@ export default function JobCard({ job }: Props) {
                 </p>
               </div>
 
-              <div className="text-right">
+              <div className="sm:text-right">
                 {job.salaryMin && job.salaryMax ? (
                   <div className="text-sm font-semibold text-green-600">
                     Rp {(job.salaryMin / 1000000).toFixed(1)}jt -

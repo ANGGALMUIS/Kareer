@@ -399,18 +399,20 @@ export default function ApplicantLayout({
       bg-black/50
       md:hidden
     "
+              onClick={() => setMobileMenuOpen(false)}
             >
               <div
+                onClick={(e) => e.stopPropagation()}
                 className="
-        absolute
-        right-0
-        top-0
-        h-full
-        w-[85%]
-        max-w-sm
-        bg-white
-        shadow-[0_20px_50px_rgba(0,0,0,0.12)]
-      "
+    absolute
+    right-0
+    top-0
+    h-full
+    w-[75%]
+    max-w-[300px]
+    bg-white
+    shadow-[0_20px_50px_rgba(0,0,0,0.12)]
+  "
               >
                 {/* HEADER */}
 

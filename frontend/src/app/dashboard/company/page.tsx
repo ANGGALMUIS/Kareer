@@ -97,7 +97,7 @@ export default function CompanyDashboardPage() {
       </div>
 
       <section className="relative min-h-screen overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 py-1">
+        <div className="mx-auto max-w-7xl px-1 sm:px-1 md:px-6 py-1">
           {/* HERO */}
 
           <div
@@ -129,24 +129,18 @@ export default function CompanyDashboardPage() {
             <div className="relative z-10">
               <p className="text-blue-100">Employer Dashboard</p>
 
-              <h1
-                className="
-        mt-3
-        text-5xl
-        font-bold
-        leading-tight
-      "
-              >
+              <h1 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold">
                 👋 Selamat Datang
               </h1>
 
               <p
                 className="
-        mt-4
-        max-w-2xl
-        text-lg
-        text-blue-100
-      "
+    mt-3
+    max-w-xl
+    text-sm
+    sm:text-base
+    text-purple-100
+  "
               >
                 Pantau perkembangan rekrutmen, kelola lowongan, dan temukan
                 kandidat terbaik lebih cepat.
@@ -163,16 +157,18 @@ export default function CompanyDashboardPage() {
                 <Link
                   href="/dashboard/company/jobs/create"
                   className="
-          inline-flex
-          items-center
-          gap-2
-          rounded-2xl
-          bg-white
-          px-6
-          py-3
-          font-semibold
-          text-blue-700
-        "
+w-full
+md:w-auto
+inline-flex
+gap-2
+items-center
+rounded-2xl
+bg-white
+px-5
+py-3
+font-semibold
+text-indigo-700
+"
                 >
                   <Plus size={18} />
                   Buat Lowongan
@@ -181,16 +177,18 @@ export default function CompanyDashboardPage() {
                 <Link
                   href="/dashboard/company/applications"
                   className="
-          inline-flex
+w-full
+md:w-auto
+rounded-2xl
+border
+px-5
+py-3
+font-semibold
+text-white
+inline-flex
           items-center
           gap-2
-          rounded-2xl
-          border
-          border-white/30
-          px-6
-          py-3
-          text-white
-        "
+"
                 >
                   <ArrowRight size={18} />
                   Lihat Pelamar

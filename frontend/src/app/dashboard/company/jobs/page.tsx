@@ -100,7 +100,7 @@ export default function CompanyJobsPage() {
   return (
     <ProtectedRoute role="COMPANY">
       <section className="min-h-screen bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-1">
+        <div className="mx-auto max-w-7xl px-1 sm:px-1 md:px-6 py-1">
           {/* HEADER */}
           {/* HERO */}
 
@@ -130,11 +130,33 @@ export default function CompanyJobsPage() {
     "
             />
 
-            <div className="relative z-10 flex items-center justify-between">
+            <div
+              className="
+    relative
+    z-10
+    flex
+    flex-col
+    gap-6
+
+    lg:flex-row
+    lg:items-center
+    lg:justify-between
+  "
+            >
               <div>
                 <p className="text-blue-100">Recruitment Workspace</p>
 
-                <h1 className="mt-2 text-5xl font-bold">📦 Lowongan Saya</h1>
+                <h1
+                  className="
+    mt-2
+    text-3xl
+    font-bold
+
+    md:text-5xl
+  "
+                >
+                  📦 Lowongan Saya
+                </h1>
 
                 <p className="mt-4 max-w-xl text-blue-100">
                   Kelola seluruh lowongan perusahaan, pantau performa rekrutmen,
@@ -145,13 +167,17 @@ export default function CompanyJobsPage() {
               <Link
                 href="/dashboard/company/jobs/create"
                 className="
-        rounded-2xl
-        bg-white
-        px-6
-        py-3
-        font-semibold
-        text-blue-700
-      "
+    w-full
+    rounded-2xl
+    bg-white
+    px-6
+    py-3
+    text-center
+    font-semibold
+    text-blue-700
+
+    sm:w-auto
+  "
               >
                 + Buat Lowongan
               </Link>
@@ -217,33 +243,43 @@ export default function CompanyJobsPage() {
     shadow-sm
   "
           >
-            <div className="flex gap-4">
+            <div
+              className="
+    flex
+    flex-col
+    gap-3
+
+    sm:flex-row
+  "
+            >
               <input
                 type="text"
                 placeholder="🔍 Cari lowongan..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="
-        flex-1
-        rounded-2xl
-        border
-        border-slate-200
-        px-5
-        py-3
-        outline-none
-        focus:border-blue-500
-      "
+  w-full
+  flex-1
+  rounded-2xl
+  border
+  border-slate-200
+  px-5
+  py-3
+"
               />
 
               <button
                 onClick={() => setPage(1)}
                 className="
-        rounded-2xl
-        bg-blue-600
-        px-6
-        py-3
-        text-white
-      "
+  w-full
+  rounded-2xl
+  bg-blue-600
+  px-6
+  py-3
+  text-white
+
+  sm:w-auto
+"
               >
                 Cari
               </button>

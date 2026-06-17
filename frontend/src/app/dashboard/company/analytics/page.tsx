@@ -47,7 +47,7 @@ export default function CompanyAnalyticsPage() {
   return (
     <ProtectedRoute role="COMPANY">
       <section className="min-h-screen bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-1">
+        <div className="mx-auto max-w-7xl px-1 sm:px-1 md:px-6 py-1">
           <div
             className="
     relative
@@ -63,9 +63,19 @@ export default function CompanyAnalyticsPage() {
           >
             <p className="text-white/80">Recruitment Performance</p>
 
-            <h1 className="mt-2 text-5xl font-bold">Analytics Dashboard</h1>
+            <h1 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold">
+              Analytics Dashboard
+            </h1>
 
-            <p className="mt-4 max-w-2xl text-white/90">
+            <p
+              className="
+    mt-3
+    max-w-xl
+    text-sm
+    sm:text-base
+    text-purple-100
+  "
+            >
               Pantau performa lowongan, kandidat, interview, dan efektivitas
               proses rekrutmen perusahaan.
             </p>

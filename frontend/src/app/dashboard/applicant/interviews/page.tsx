@@ -51,12 +51,12 @@ export default function ApplicantInterviewsPage() {
   };
 
   return (
-  <section className="min-h-screen bg-slate-50">
-    <div className="mx-auto max-w-6xl px-6 pt-2 pb-10">
-      {/* HERO */}
+    <section className="min-h-screen bg-slate-50">
+      <div className="mx-auto max-w-7xl px-1 sm:px-1 md:px-6 py-1">
+        {/* HERO */}
 
-      <div
-        className="
+        <div
+          className="
           mb-8
           overflow-hidden
           rounded-[28px]
@@ -68,26 +68,21 @@ export default function ApplicantInterviewsPage() {
           text-white
           shadow-xl
         "
-      >
-        <p className="text-blue-100">
-          Applicant Workspace
-        </p>
+        >
+          <p className="text-blue-100">Applicant Workspace</p>
 
-        <h1 className="mt-2 text-4xl font-bold">
-          Interview Center
-        </h1>
+          <h1 className="mt-2 text-4xl font-bold">Interview Center</h1>
 
-        <p className="mt-3 text-blue-100">
-          Kelola seluruh jadwal interview dan
-          pantau proses rekrutmenmu.
-        </p>
-      </div>
+          <p className="mt-3 text-blue-100">
+            Kelola seluruh jadwal interview dan pantau proses rekrutmenmu.
+          </p>
+        </div>
 
-      {/* STATS */}
+        {/* STATS */}
 
-      <div className="mb-8 grid gap-6 md:grid-cols-3">
-        <div
-          className="
+        <div className="mb-8 grid gap-6 md:grid-cols-3">
+          <div
+            className="
             rounded-3xl
             bg-white
             p-6
@@ -97,18 +92,16 @@ export default function ApplicantInterviewsPage() {
             hover:-translate-y-1
             hover:shadow-xl
           "
-        >
-          <p className="text-sm text-slate-500">
-            Total Interview
-          </p>
+          >
+            <p className="text-sm text-slate-500">Total Interview</p>
 
-          <h2 className="mt-3 text-4xl font-bold text-blue-600">
-            {interviews.length}
-          </h2>
-        </div>
+            <h2 className="mt-3 text-4xl font-bold text-blue-600">
+              {interviews.length}
+            </h2>
+          </div>
 
-        <div
-          className="
+          <div
+            className="
             rounded-3xl
             bg-white
             p-6
@@ -118,24 +111,16 @@ export default function ApplicantInterviewsPage() {
             hover:-translate-y-1
             hover:shadow-xl
           "
-        >
-          <p className="text-sm text-slate-500">
-            Scheduled
-          </p>
+          >
+            <p className="text-sm text-slate-500">Scheduled</p>
 
-          <h2 className="mt-3 text-4xl font-bold text-indigo-600">
-            {
-              interviews.filter(
-                (i) =>
-                  i.status ===
-                  "SCHEDULED",
-              ).length
-            }
-          </h2>
-        </div>
+            <h2 className="mt-3 text-4xl font-bold text-indigo-600">
+              {interviews.filter((i) => i.status === "SCHEDULED").length}
+            </h2>
+          </div>
 
-        <div
-          className="
+          <div
+            className="
             rounded-3xl
             bg-white
             p-6
@@ -145,45 +130,36 @@ export default function ApplicantInterviewsPage() {
             hover:-translate-y-1
             hover:shadow-xl
           "
-        >
-          <p className="text-sm text-slate-500">
-            Completed
-          </p>
+          >
+            <p className="text-sm text-slate-500">Completed</p>
 
-          <h2 className="mt-3 text-4xl font-bold text-green-600">
-            {
-              interviews.filter(
-                (i) =>
-                  i.status ===
-                  "COMPLETED",
-              ).length
-            }
-          </h2>
+            <h2 className="mt-3 text-4xl font-bold text-green-600">
+              {interviews.filter((i) => i.status === "COMPLETED").length}
+            </h2>
+          </div>
         </div>
-      </div>
 
-      {/* CONTENT */}
+        {/* CONTENT */}
 
-      {loading && (
-        <div className="space-y-4">
-          {[1, 2, 3].map((item) => (
-            <div
-              key={item}
-              className="
+        {loading && (
+          <div className="space-y-4">
+            {[1, 2, 3].map((item) => (
+              <div
+                key={item}
+                className="
                 h-48
                 animate-pulse
                 rounded-3xl
                 bg-white
               "
-            />
-          ))}
-        </div>
-      )}
+              />
+            ))}
+          </div>
+        )}
 
-      {!loading && (
-        <div className="space-y-6">
-          {interviews.map(
-            (interview) => (
+        {!loading && (
+          <div className="space-y-6">
+            {interviews.map((interview) => (
               <div
                 key={interview.id}
                 className="
@@ -200,59 +176,34 @@ export default function ApplicantInterviewsPage() {
                 <div className="flex flex-col gap-6 lg:flex-row lg:justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
-                      <Briefcase
-                        size={22}
-                        className="text-blue-600"
-                      />
+                      <Briefcase size={22} className="text-blue-600" />
 
                       <h2 className="text-2xl font-bold">
-                        {
-                          interview
-                            .application
-                            ?.jobListing
-                            ?.title
-                        }
+                        {interview.application?.jobListing?.title}
                       </h2>
                     </div>
 
                     <div className="mt-3 flex items-center gap-2 text-slate-600">
-                      <Building2
-                        size={18}
-                      />
+                      <Building2 size={18} />
 
                       <span>
-                        {
-                          interview
-                            .application
-                            ?.jobListing
-                            ?.company
-                            ?.name
-                        }
+                        {interview.application?.jobListing?.company?.name}
                       </span>
                     </div>
 
                     <div className="mt-6 grid gap-4 md:grid-cols-2">
                       <div className="flex items-start gap-3">
-                        <Calendar
-                          size={18}
-                          className="mt-1 text-blue-600"
-                        />
+                        <Calendar size={18} className="mt-1 text-blue-600" />
 
                         <div>
-                          <p className="font-semibold">
-                            Jadwal Interview
-                          </p>
+                          <p className="font-semibold">Jadwal Interview</p>
 
                           <p className="text-slate-600">
-                            {new Date(
-                              interview.scheduledAt,
-                            ).toLocaleString(
+                            {new Date(interview.scheduledAt).toLocaleString(
                               "id-ID",
                               {
-                                dateStyle:
-                                  "full",
-                                timeStyle:
-                                  "short",
+                                dateStyle: "full",
+                                timeStyle: "short",
                               },
                             )}
                           </p>
@@ -261,20 +212,13 @@ export default function ApplicantInterviewsPage() {
 
                       {interview.location && (
                         <div className="flex items-start gap-3">
-                          <MapPin
-                            size={18}
-                            className="mt-1 text-green-600"
-                          />
+                          <MapPin size={18} className="mt-1 text-green-600" />
 
                           <div>
-                            <p className="font-semibold">
-                              Lokasi
-                            </p>
+                            <p className="font-semibold">Lokasi</p>
 
                             <p className="text-slate-600">
-                              {
-                                interview.location
-                              }
+                              {interview.location}
                             </p>
                           </div>
                         </div>
@@ -290,23 +234,17 @@ export default function ApplicantInterviewsPage() {
                           p-4
                         "
                       >
-                        <h3 className="font-semibold">
-                          Catatan Recruiter
-                        </h3>
+                        <h3 className="font-semibold">Catatan Recruiter</h3>
 
                         <p className="mt-2 whitespace-pre-wrap text-slate-600">
-                          {
-                            interview.notes
-                          }
+                          {interview.notes}
                         </p>
                       </div>
                     )}
 
                     {interview.meetingLink && (
                       <a
-                        href={
-                          interview.meetingLink
-                        }
+                        href={interview.meetingLink}
                         target="_blank"
                         rel="noreferrer"
                         className="
@@ -326,9 +264,7 @@ export default function ApplicantInterviewsPage() {
                           hover:bg-blue-700
                         "
                       >
-                        <LinkIcon
-                          size={18}
-                        />
+                        <LinkIcon size={18} />
                         🚀 Join Meeting
                       </a>
                     )}
@@ -342,49 +278,39 @@ export default function ApplicantInterviewsPage() {
                         py-2
                         text-sm
                         font-bold
-                        ${getStatusColor(
-                          interview.status,
-                        )}
+                        ${getStatusColor(interview.status)}
                       `}
                     >
-                      {
-                        interview.status
-                      }
+                      {interview.status}
                     </span>
                   </div>
                 </div>
               </div>
-            ),
-          )}
+            ))}
 
-          {interviews.length === 0 && (
-            <div
-              className="
+            {interviews.length === 0 && (
+              <div
+                className="
                 rounded-3xl
                 bg-white
                 p-12
                 text-center
                 shadow-sm
               "
-            >
-              <div className="text-6xl">
-                📅
+              >
+                <div className="text-6xl">📅</div>
+
+                <h2 className="mt-4 text-2xl font-bold">Belum Ada Interview</h2>
+
+                <p className="mt-3 text-slate-500">
+                  Ketika recruiter menjadwalkan interview, informasinya akan
+                  muncul di sini.
+                </p>
               </div>
-
-              <h2 className="mt-4 text-2xl font-bold">
-                Belum Ada Interview
-              </h2>
-
-              <p className="mt-3 text-slate-500">
-                Ketika recruiter menjadwalkan
-                interview, informasinya akan
-                muncul di sini.
-              </p>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  </section>
-);
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  );
 }

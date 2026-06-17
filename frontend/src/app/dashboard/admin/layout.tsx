@@ -181,6 +181,7 @@ export default function AdminLayout({
       bg-black/50
       md:hidden
     "
+              onClick={() => setMobileMenuOpen(false)}
             >
               <div
                 className="
@@ -188,8 +189,8 @@ export default function AdminLayout({
         right-0
         top-0
         h-full
-        w-[85%]
-        max-w-sm
+         w-[70%]
+    max-w-[300px]
         bg-white
         shadow-[0_20px_50px_rgba(0,0,0,0.12)]
       "

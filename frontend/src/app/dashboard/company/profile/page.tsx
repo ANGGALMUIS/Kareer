@@ -108,7 +108,7 @@ export default function CompanyProfilePage() {
   return (
     <ProtectedRoute role="COMPANY">
       <section className="min-h-screen bg-slate-50">
-        <div className="mx-auto max-w-5xl px-6 py-1">
+        <div className="mx-auto max-w-7xl px-1 sm:px-1 md:px-6 py-1">
           <div
             className="
     rounded-[32px]
@@ -124,11 +124,19 @@ export default function CompanyProfilePage() {
               <div>
                 <p className="text-white/80">Company Workspace</p>
 
-                <h1 className="mt-2 text-5xl font-bold">
+                <h1 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold">
                   🏢 Profil Perusahaan
                 </h1>
 
-                <p className="mt-4 text-white/90">
+                <p
+                  className="
+    mt-3
+    max-w-xl
+    text-sm
+    sm:text-base
+    text-purple-100
+  "
+                >
                   Kelola identitas dan informasi perusahaan Anda.
                 </p>
               </div>
@@ -192,8 +200,6 @@ export default function CompanyProfilePage() {
                       Uploading logo...
                     </p>
                   )}
-
-                  
                 </div>
 
                 <div className="space-y-6">
